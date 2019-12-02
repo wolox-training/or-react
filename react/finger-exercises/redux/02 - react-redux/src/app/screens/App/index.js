@@ -19,20 +19,38 @@ class App extends Component {
       const { books, bookSelected } = store.getState();
       this.setState({ books, bookSelected });
     });
-    // TODO to implement the dispatch
+    store.dispatch({
+      type: '@@BOOK/GET_BOOKS'
+    });
   }
 
-  // TODO to implement the dispatch
-  onSearch = value => {};
+  onSearch = value => {
+    store.dispatch({
+      type: '@@BOOK/SEARCH_ITEM',
+      value
+    });
+  };
 
-  // TODO to implement the dispatch
-  addToCart = item => {};
+  addToCart = item => {
+    store.dispatch({
+      type: '@@BOOK/ADD_TO_CART',
+      item
+    });
+  };
 
-  // TODO to implement the dispatch
-  addItem = itemId => {};
+  addItem = itemId => {
+    store.dispatch({
+      type: '@@BOOK/ADD_ITEM',
+      itemId
+    });
+  };
 
-  // TODO to implement the dispatch
-  removeItem = itemId => {};
+  removeItem = itemId => {
+    store.dispatch({
+      type: '@@BOOK/REMOVE_ITEM',
+      itemId
+    });
+  };
 
   CONFIGURATION_BUTTON = {
     add: {
@@ -61,10 +79,10 @@ class App extends Component {
           {this.state.books.length ? (
             this.state.books.map(this.renderBooks)
           ) : (
-            <div className={styles.noData}>
-              <h2 className={styles.title}>No Data</h2>
-            </div>
-          )}
+              <div className={styles.noData}>
+                <h2 className={styles.title}>No Data</h2>
+              </div>
+            )}
         </div>
         {this.state.bookSelected.length ? (
           <ShoppingCart data={this.state.bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
