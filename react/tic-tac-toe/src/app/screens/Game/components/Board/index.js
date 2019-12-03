@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 class Board extends Component {
 
-  renderSquare(i) {
+  squarePosition(i) {
     return (
       <Square
         value={this.props.squares[i]}
@@ -18,19 +18,19 @@ class Board extends Component {
     return (
       <div>
         <div className={styles.boardRow}>
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {this.squarePosition(0)}
+          {this.squarePosition(1)}
+          {this.squarePosition(2)}
         </div>
         <div className={styles.boardRow}>
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.squarePosition(3)}
+          {this.squarePosition(4)}
+          {this.squarePosition(5)}
         </div>
         <div className={styles.boardRow}>
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {this.squarePosition(6)}
+          {this.squarePosition(7)}
+          {this.squarePosition(8)}
         </div>
       </div>
     );
