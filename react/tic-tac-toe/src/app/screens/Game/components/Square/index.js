@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function Square({onClick,value}) {
+function Square({ onClick,value }) {
   return (
     <button 
       className={styles.square} 
-      onClick={(onClick)}
+      onClick={ onClick }
       >
       {value}
     </button>
