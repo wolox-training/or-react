@@ -18,6 +18,7 @@ class Item extends PureComponent {
 
   render() {
     const { item } = this.props;
+    console.log(item);  
     return (
       <li className={styles.item}>
         <h3 className={styles.title}>{item.name}</h3>

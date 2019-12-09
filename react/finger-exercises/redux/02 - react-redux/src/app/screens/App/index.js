@@ -9,6 +9,7 @@ import styles from './styles.scss';
 import { connect } from 'react-redux';
 
 class App extends Component {
+  props: any;
 
   componentDidMount() {
     this.props.getBooks();
@@ -47,7 +48,7 @@ class App extends Component {
             )}
         </div>
         {this.props.bookSelected.length ? (
-          <ShoppingCart data={this.props.bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
+          <ShoppingCart data={this.props.bookSelected} addItem={this.props.addItem} removeItem={this.props.removeItem} />
         ) : null}
         <Footer />
       </Fragment>

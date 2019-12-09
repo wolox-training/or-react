@@ -21,9 +21,13 @@ function reducer(state = initialState, action) {
         bookSelected: state.bookSelected.concat(action.item)
       };
     case actions.ADD_ITEM:
+      const indexItem = state.bookSelected.findIndex(({ id }) => id == action.itemId);
+      const newItem = state.bookSelected[indexItem];
+      newItem.quantity++; 
       return {
         ...state,
-        bookSelected: addItem(state.bookSelected, action.itemId)
+        bookSelected: Object.assign([...state.bookSelected], {[indexItem]: newItem})
+
       };
     case actions.REMOVE_ITEM:
       return {
@@ -44,12 +48,6 @@ function filterByName(arr, value) {
   return arr.filter(function (a) {
     return a.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
   })
-}
-
-function addItem(selected, id) {
-  var index = selected.findIndex(i => i.id === id);
-  selected[index].quantity++;
-  return selected;
 }
 
 export default reducer;
