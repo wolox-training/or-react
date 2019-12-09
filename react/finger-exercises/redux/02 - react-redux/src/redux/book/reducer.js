@@ -52,5 +52,4 @@ function addItem(selected, id) {
   return selected;
 }
 
-
 export default reducer;
