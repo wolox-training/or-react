@@ -24,12 +24,11 @@ function reducer(state = initialState, action) {
       };
     case actions.ADD_ITEM:
       const indexItem = state.bookSelected.findIndex(({ id }) => id == action.payload);
-      const newItem = state.bookSelected[indexItem];
-      newItem.quantity++;
+      const bookSelected = [ ...state.bookSelected ];
+      bookSelected[indexItem].quantity++;
       return {
         ...state,
-        bookSelected: Object.assign([...state.bookSelected], { [indexItem]: newItem })
-
+        bookSelected
       };
     case actions.REMOVE_ITEM:
       return {

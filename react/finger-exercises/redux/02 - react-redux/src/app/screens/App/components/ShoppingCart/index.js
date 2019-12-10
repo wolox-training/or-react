@@ -23,7 +23,6 @@ class ShoppingCart extends PureComponent {
   total = (accumulator, currentValue) => accumulator + currentValue.quantity;
 
   renderItem = item => {
-    console.log(actionsCreators);
     const { addItem, removeItem } = this.props;
     return <Item key={item.id} item={item} addItem={addItem} removeItem={removeItem} />;
   };
