@@ -1,7 +1,5 @@
 import { actions } from './actions';
-import { DATA } from '@constants/data';
 import filterByName from '/utils/utils.js';
-
 
 const initialState = {
   books: [],
@@ -12,10 +10,11 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.GET_BOOKS:
+      console.log(action);  
       return {
         ...state,
-        books: state.books.concat(DATA),
-        originalData: state.originalData.concat(DATA)
+        books: action.payload,
+        originalData: action.payload
       };
     case actions.ADD_TO_CART:
       return {
