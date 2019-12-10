@@ -1,5 +1,3 @@
-export default function filterByName(arr, value) {
-  return arr.filter(function (a) {
-    return a.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-  })
+export default function filterByName(books, value) {
+  return books.filter(book => book.name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
 }

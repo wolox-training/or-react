@@ -10,8 +10,7 @@ import styles from './styles.scss';
 import { connect } from 'react-redux';
 
 class App extends Component {
-  props: any;
-
+  
   componentDidMount() {
     this.props.getBooks();
   }

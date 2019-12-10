@@ -28,6 +28,7 @@ class ShoppingCart extends PureComponent {
   };
 
   render() {
+    const { bookSelected } = this.props;
     return (
       <Fragment>
         <Button className={styles.buttonCart} onClick={this.toggleContent}>
@@ -35,8 +36,8 @@ class ShoppingCart extends PureComponent {
         </Button>
         <div className={`${styles.container} ${this.state.open ? styles.open : ''}`}>
           <h1 className={styles.title}>Cart</h1>
-          <ul className={styles.content}>{this.props.bookSelected.map(this.renderItem)}</ul>
-          <h2 className={`${styles.title} ${styles.total}`}>Total: {this.props.bookSelected.reduce(this.total, 0)}</h2>
+          <ul className={styles.content}>{bookSelected.map(this.renderItem)}</ul>
+          <h2 className={`${styles.title} ${styles.total}`}>Total: {bookSelected.reduce(this.total, 0)}</h2>
         </div>
       </Fragment>
     );
