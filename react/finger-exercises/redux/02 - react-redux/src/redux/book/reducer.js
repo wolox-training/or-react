@@ -1,5 +1,7 @@
 import { actions } from './actions';
 import { DATA } from '@constants/data';
+import filterByName from '/utils/utils.js';
+
 
 const initialState = {
   books: [],
@@ -18,36 +20,30 @@ function reducer(state = initialState, action) {
     case actions.ADD_TO_CART:
       return {
         ...state,
-        bookSelected: state.bookSelected.concat(action.item)
+        bookSelected: state.bookSelected.concat(action.payload)
       };
     case actions.ADD_ITEM:
-      const indexItem = state.bookSelected.findIndex(({ id }) => id == action.itemId);
+      const indexItem = state.bookSelected.findIndex(({ id }) => id == action.payload);
       const newItem = state.bookSelected[indexItem];
-      newItem.quantity++; 
+      newItem.quantity++;
       return {
         ...state,
-        bookSelected: Object.assign([...state.bookSelected], {[indexItem]: newItem})
+        bookSelected: Object.assign([...state.bookSelected], { [indexItem]: newItem })
 
       };
     case actions.REMOVE_ITEM:
       return {
         ...state,
-        bookSelected: state.bookSelected.filter(item => item.id !== action.itemId)
+        bookSelected: state.bookSelected.filter(item => item.id !== action.payload)
       };
     case actions.SEARCH_ITEM:
       return {
         ...state,
-        books: filterByName(state.originalData, action.value)
+        books: filterByName(state.originalData, action.payload)
       };
     default:
       return state;
   }
-}
-
-function filterByName(arr, value) {
-  return arr.filter(function (a) {
-    return a.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-  })
 }
 
 export default reducer;

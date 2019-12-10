@@ -9,21 +9,22 @@ class Item extends PureComponent {
   addItem = () => {
     const { item, addItem } = this.props;
     addItem(item.id);
-  };
+    };
 
   removeItem = () => {
     const { item, removeItem } = this.props;
     removeItem(item.id);
+    console.log(item.id);
   };
 
   render() {
-    const { item } = this.props;
-    console.log(item);  
+    console.log(this.props);
+    const { name, quantity } = this.props.item;
     return (
       <li className={styles.item}>
-        <h3 className={styles.title}>{item.name}</h3>
+        <h3 className={styles.title}>{name}</h3>
         <span className={styles.contentButtons}>
-          <span className={styles.quantity}>{item.quantity}</span>
+          <span className={styles.quantity}>{quantity}</span>
           <Button className={styles.buttonCart} onClick={this.addItem}>
             <i className="fa fa-plus" />
           </Button>

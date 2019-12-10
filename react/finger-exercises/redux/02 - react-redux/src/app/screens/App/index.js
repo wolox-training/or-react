@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
+import  actionsCreators from '/redux/book/actions'
 
 import Book from './components/Book';
 import Search from './components/Search';
@@ -56,33 +57,16 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  books: state.books.books,
+  bookSelected: state.books.bookSelected
+});
 
-const mapStateToProps = state => {
-  return {
-    books: state.books.books,
-    bookSelected: state.books.bookSelected
-  };
-};
-
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getBooks: () => {
-      dispatch({type: '@@BOOK/GET_BOOKS'});
-    },
-    removeItem: (itemId) => {
-      dispatch({type: '@@BOOK/REMOVE_ITEM', itemId});
-    },
-    addToCart: (item) =>  {
-      dispatch({type: '@@BOOK/ADD_TO_CART', item});
-    },
-    addItem: (itemId) =>  {
-      dispatch({type: '@@BOOK/ADD_ITEM', itemId});
-    },
-    onSearch: (value) =>  {
-      dispatch({type: '@@BOOK/SEARCH_ITEM', value});
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  getBooks: () =>  dispatch(actionsCreators.getBooks()),
+  removeItem: (itemId) => dispatch(actionsCreators.removeItem(itemId)),
+  addToCart: (item) => dispatch(actionsCreators.addToCart(item)),
+  onSearch: (value) => dispatch(actionsCreators.searchBook(value)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
