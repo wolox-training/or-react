@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
-import  actionsCreators from '/redux/book/actions'
+import actionsCreators from '/redux/book/actions'
 
 import Book from './components/Book';
 import Search from './components/Search';
@@ -63,10 +63,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getBooks: () =>  dispatch(actionsCreators.getBooks()),
-  removeItem: (itemId) => dispatch(actionsCreators.removeItem(itemId)),
-  addToCart: (item) => dispatch(actionsCreators.addToCart(item)),
-  onSearch: (value) => dispatch(actionsCreators.searchBook(value)),
+  getBooks: () => dispatch(actionsCreators.getBooks()),
+  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId)),
+  addToCart: item => dispatch(actionsCreators.addToCart(item)),
+  onSearch: value => dispatch(actionsCreators.searchBook(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

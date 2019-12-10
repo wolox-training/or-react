@@ -9,18 +9,13 @@ class Item extends Component {
   addItem = () => {
     const { item, addItem } = this.props;
     addItem(item.id);
-    };
-
+  };
   removeItem = () => {
     const { item, removeItem } = this.props;
     removeItem(item.id);
-    console.log(item.id);
   };
-
   render() {
-    console.log(this.props);
     const { name, quantity } = this.props.item;
-    console.log(quantity);
     return (
       <li className={styles.item}>
         <h3 className={styles.title}>{name}</h3>
@@ -37,11 +32,9 @@ class Item extends Component {
     );
   }
 }
-
 Item.propTypes = {
   item: bookSelectedPropType,
   addItem: func.isRequired,
   removeItem: func.isRequired
 };
-
 export default Item;

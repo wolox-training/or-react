@@ -27,7 +27,7 @@ const actionsCreators = {
     type: actions.ADD_ITEM,
     payload: itemId
   }),
-  removeItem: (itemId) => ({
+  removeItem: itemId => ({
     type: actions.REMOVE_ITEM,
     payload: itemId
   }),

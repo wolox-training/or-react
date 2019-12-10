@@ -10,7 +10,6 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.GET_BOOKS:
-      console.log(action);  
       return {
         ...state,
         books: action.payload,
