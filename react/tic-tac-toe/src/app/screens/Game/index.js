@@ -2,17 +2,31 @@ import React, { Component } from 'react';
 import Board from './components/Board';
 import calculateWinner from '/utils/utils.js';
 import styles from './styles.module.scss';
-import api from '/services/MatchesService.js'
+import api from '/services/MatchesService.js';
+var Spinner = require('react-spinkit');
 
 class Game extends Component {
-
   state = {
     history: [{
       squares: Array(9).fill(null),
     }],
     stepNumber: 0,
     xIsNext: true,
+    matches: []
   };
+  
+  componentDidMount() {
+    api.getMatches()
+      .then(function (val) {
+        let items = val.data.map((item) => {
+          return (
+            <li>{item.player_one}</li>
+          )
+        });
+        console.log(items);
+      //  this.setState ({matches: items});
+      });
+  }
 
   handleClick(i) {
     const { history, xIsNext } = this.state;
@@ -43,12 +57,6 @@ class Game extends Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    let matches = api.getMatches();
-
-    matches.then(function (val) {
-      const matchess = val.data.map(renderMatchs);
-      console.log(matchess);
-    });
 
     const renderMoves = (step, move) => {
       const desc = move ?
@@ -58,12 +66,6 @@ class Game extends Component {
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
-      );
-    }
-
-    const renderMatchs = (match) => {
-      return (
-        <li>{match.player_one}</li>
       );
     }
 
@@ -87,7 +89,9 @@ class Game extends Component {
           <div>{status}</div>
           <ol>{moves}</ol>
         </div>
-        <div><ol>{this.matchess}</ol></div>
+        <div>
+        <Spinner name="circle" />
+        <ol></ol></div>
       </div>
     );
   }
