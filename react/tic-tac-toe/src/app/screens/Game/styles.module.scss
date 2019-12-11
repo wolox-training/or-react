@@ -3,6 +3,17 @@
   flex-direction: row;
 }
 
+.game > div {
+  margin: 10px;
+}
+
 .game-info {
   margin-left: 20px;
+}
+
+td {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #999;
+  padding: 3px;
 }

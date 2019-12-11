@@ -12,20 +12,19 @@ class Game extends Component {
     }],
     stepNumber: 0,
     xIsNext: true,
-    matches: []
+    data: [],
+    loading: false
   };
-  
+
   componentDidMount() {
-    api.getMatches()
-      .then(function (val) {
-        let items = val.data.map((item) => {
-          return (
-            <li>{item.player_one}</li>
-          )
-        });
-        console.log(items);
-      //  this.setState ({matches: items});
-      });
+    this.setState({ loading: true }, () => {
+      api.getMatches()
+        .then(result => this.setState({
+          loading: false,
+          data: [...result.data],
+        }
+        ));
+    });
   }
 
   handleClick(i) {
@@ -55,6 +54,8 @@ class Game extends Component {
 
   render() {
     const history = this.state.history;
+    const data = this.state.data;
+    const loading = this.state.loading;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
@@ -71,6 +72,13 @@ class Game extends Component {
 
     const moves = history.map(renderMoves);
 
+    const renderMatchs = (match) => {
+      return (
+        <tr key={match.id}><td>{match.player_one}</td><td>{match.winner === 'player_one' ? '1' : '0'}-{match.winner === 'player_two' ? '1' : '0'}</td><td>{match.player_two}</td></tr>
+      )
+    }
+    const matches = data.map(renderMatchs);
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -79,19 +87,22 @@ class Game extends Component {
     }
     return (
       <div className={styles.game}>
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+        <div>
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
         </div>
         <div>
-        <Spinner name="circle" />
-        <ol></ol></div>
+          Maches:
+          {loading ? <Spinner name="circle" /> : <table><tbody>{matches}</tbody></table>}
+        </div>
       </div>
     );
   }
