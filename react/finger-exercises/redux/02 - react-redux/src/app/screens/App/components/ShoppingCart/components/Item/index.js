@@ -1,28 +1,26 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { bookSelectedPropType } from '@constants/propTypes';
 import Button from '@components/Button';
 
 import styles from './styles.scss';
 
-class Item extends PureComponent {
+class Item extends Component {
   addItem = () => {
     const { item, addItem } = this.props;
     addItem(item.id);
   };
-
   removeItem = () => {
     const { item, removeItem } = this.props;
     removeItem(item.id);
   };
-
   render() {
-    const { item } = this.props;
+    const { name, quantity } = this.props.item;
     return (
       <li className={styles.item}>
-        <h3 className={styles.title}>{item.name}</h3>
+        <h3 className={styles.title}>{name}</h3>
         <span className={styles.contentButtons}>
-          <span className={styles.quantity}>{item.quantity}</span>
+          <span className={styles.quantity}>{quantity}</span>
           <Button className={styles.buttonCart} onClick={this.addItem}>
             <i className="fa fa-plus" />
           </Button>

@@ -2,11 +2,14 @@ import React, { PureComponent, Fragment } from 'react';
 import { arrayOf, func } from 'prop-types';
 import { bookSelectedPropType } from '@constants/propTypes';
 import Button from '@components/Button';
+import { connect } from 'react-redux';
+import actionsCreators from '/redux/book/actions'
 
 import Item from './components/Item';
 import styles from './styles.scss';
 
 class ShoppingCart extends PureComponent {
+
   state = {
     open: false
   };
@@ -25,7 +28,7 @@ class ShoppingCart extends PureComponent {
   };
 
   render() {
-    const { data } = this.props;
+    const { bookSelected } = this.props;
     return (
       <Fragment>
         <Button className={styles.buttonCart} onClick={this.toggleContent}>
@@ -33,8 +36,8 @@ class ShoppingCart extends PureComponent {
         </Button>
         <div className={`${styles.container} ${this.state.open ? styles.open : ''}`}>
           <h1 className={styles.title}>Cart</h1>
-          <ul className={styles.content}>{data.map(this.renderItem)}</ul>
-          <h2 className={`${styles.title} ${styles.total}`}>Total: {data.reduce(this.total, 0)}</h2>
+          <ul className={styles.content}>{bookSelected.map(this.renderItem)}</ul>
+          <h2 className={`${styles.title} ${styles.total}`}>Total: {bookSelected.reduce(this.total, 0)}</h2>
         </div>
       </Fragment>
     );
@@ -47,4 +50,13 @@ ShoppingCart.propTypes = {
   removeItem: func.isRequired
 };
 
-export default ShoppingCart;
+const mapStateToProps = state => ({
+  bookSelected: state.books.bookSelected
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeItem: itemId => dispatch(actionsCreators.removeItem(itemId)),
+  addItem: itemId => dispatch(actionsCreators.addItem(itemId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
