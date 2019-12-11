@@ -53,10 +53,8 @@ class Game extends Component {
   }
 
   render() {
-    const history = this.state.history;
-    const data = this.state.data;
-    const loading = this.state.loading;
-    const current = history[this.state.stepNumber];
+    const { history, stepNumber, data, loading } = this.state;
+    const current = history[stepNumber];
     const winner = calculateWinner(current.squares);
 
     const renderMoves = (step, move) => {
@@ -74,7 +72,11 @@ class Game extends Component {
 
     const renderMatchs = (match) => {
       return (
-        <tr key={match.id}><td>{match.player_one}</td><td>{match.winner === 'player_one' ? '1' : '0'}-{match.winner === 'player_two' ? '1' : '0'}</td><td>{match.player_two}</td></tr>
+        <tr key={match.id}>
+          <td>{match.player_one}</td>
+          <td>{match.winner === 'player_one' ? '1' : '0'}-{match.winner === 'player_two' ? '1' : '0'}</td>
+          <td>{match.player_two}</td>
+        </tr>
       )
     }
     const matches = data.map(renderMatchs);
