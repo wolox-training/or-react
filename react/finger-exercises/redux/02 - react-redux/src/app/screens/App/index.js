@@ -34,21 +34,22 @@ class App extends Component {
   };
 
   render() {
+    const { books, bookSelected, onSearch, addItem, removeItem } = this.props;
     return (
       <Fragment>
         <Navbar />
         <div className={styles.container}>
-          <Search onSearch={this.props.onSearch} />
-          {this.props.books.length ? (
-            this.props.books.map(this.renderBooks)
+          <Search onSearch={onSearch} />
+          {books.length ? (
+            books.map(this.renderBooks)
           ) : (
               <div className={styles.noData}>
                 <h2 className={styles.title}>No Data</h2>
               </div>
             )}
         </div>
-        {this.props.bookSelected.length ? (
-          <ShoppingCart data={this.props.bookSelected} addItem={this.props.addItem} removeItem={this.props.removeItem} />
+        {bookSelected.length ? (
+          <ShoppingCart data={bookSelected} addItem={addItem} removeItem={removeItem} />
         ) : null}
         <Footer />
       </Fragment>

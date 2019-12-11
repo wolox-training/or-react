@@ -32,9 +32,11 @@ class Item extends Component {
     );
   }
 }
+
 Item.propTypes = {
   item: bookSelectedPropType,
   addItem: func.isRequired,
   removeItem: func.isRequired
 };
+
 export default Item;
