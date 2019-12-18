@@ -3,7 +3,7 @@ import Board from './components/Board';
 import calculateWinner from '/utils/utils.js';
 import styles from './styles.module.scss';
 import api from '/services/MatchesService.js';
-var Spinner = require('react-spinkit');
+import Spinner from 'react-spinkit';
 
 class Game extends Component {
   state = {
@@ -29,7 +29,7 @@ class Game extends Component {
 
   handleClick = (i) => {
     const { history, xIsNext } = this.state;
-    var steps = history.slice(0, this.state.stepNumber + 1);
+    const steps = history.slice(0, this.state.stepNumber + 1);
     const current = steps[steps.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {

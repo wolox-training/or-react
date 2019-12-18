@@ -3,12 +3,17 @@ import styles from './styles.module.scss';
 
 class Square extends Component {
 
+  handleClick = () => {
+    const { onClick, i } = this.props;
+    onClick(i);
+  }
+  
   render() {
-    const { onClick, value, i } = this.props
+    const { value } = this.props
     return (
       <button
         className={styles.square}
-        onClick = {() => onClick(i)}
+        onClick={this.handleClick}
       >
         {value}
       </button>
@@ -17,3 +22,4 @@ class Square extends Component {
 }
 
 export default Square;
+
