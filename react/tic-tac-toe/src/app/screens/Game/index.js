@@ -3,7 +3,7 @@ import Board from './components/Board';
 import calculateWinner from '/utils/utils.js';
 import styles from './styles.module.scss';
 import api from '/services/MatchesService.js';
-var Spinner = require('react-spinkit');
+import Spinner from 'react-spinkit';
 
 class Game extends Component {
   state = {
@@ -27,9 +27,9 @@ class Game extends Component {
     });
   }
 
-  handleClick(i) {
+  handleClick = (i) => {
     const { history, xIsNext } = this.state;
-    var steps = history.slice(0, this.state.stepNumber + 1);
+    const steps = history.slice(0, this.state.stepNumber + 1);
     const current = steps[steps.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -45,7 +45,7 @@ class Game extends Component {
     });
   }
 
-  jumpTo(step) {
+  jumpTo = (step) => {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
@@ -53,10 +53,8 @@ class Game extends Component {
   }
 
   render() {
-    const history = this.state.history;
-    const data = this.state.data;
-    const loading = this.state.loading;
-    const current = history[this.state.stepNumber];
+    const { history, stepNumber, data, loading } = this.state;
+    const current = history[stepNumber];
     const winner = calculateWinner(current.squares);
 
     const renderMoves = (step, move) => {
@@ -74,7 +72,11 @@ class Game extends Component {
 
     const renderMatchs = (match) => {
       return (
-        <tr key={match.id}><td>{match.player_one}</td><td>{match.winner === 'player_one' ? '1' : '0'}-{match.winner === 'player_two' ? '1' : '0'}</td><td>{match.player_two}</td></tr>
+        <tr key={match.id}>
+          <td>{match.player_one}</td>
+          <td>{match.winner === 'player_one' ? '1' : '0'}-{match.winner === 'player_two' ? '1' : '0'}</td>
+          <td>{match.player_two}</td>
+        </tr>
       )
     }
     const matches = data.map(renderMatchs);
@@ -91,7 +93,7 @@ class Game extends Component {
           <div className="game-board">
             <Board
               squares={current.squares}
-              onClick={(i) => this.handleClick(i)}
+              onClick={this.handleClick}
             />
           </div>
           <div className="game-info">

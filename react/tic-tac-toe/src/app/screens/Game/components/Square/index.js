@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './styles.module.scss';
 
-function Square({ onClick,value }) {
-  return (
-    <button 
-      className={styles.square} 
-      onClick={ onClick }
+class Square extends Component {
+
+  handleClick = () => {
+    const { onClick, i } = this.props;
+    onClick(i);
+  }
+  
+  render() {
+    const { value } = this.props
+    return (
+      <button
+        className={styles.square}
+        onClick={this.handleClick}
       >
-      {value}
-    </button>
-  );
+        {value}
+      </button>
+    );
+  }
 }
 
 export default Square;
+
